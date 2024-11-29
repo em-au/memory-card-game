@@ -49,26 +49,32 @@ function App() {
   useEffect(() => {
     let chosenPokemon = [];
     let index;
-    for (let i = 0; i < 16; i++) {
-      do {
-        index = Math.floor(Math.random() * allPokemonNames.length);
-      } while (chosenPokemon.some((p) => p.name === allPokemonNames[index]));
-      let onePokemon = {
-        name: allPokemonNames[index],
-        imageUrl: getImage(allPokemonNames[index]),
-      };
-      chosenPokemon.push(onePokemon);
-    }
-    console.log(chosenPokemon);
-    setPokemon(chosenPokemon);
-    //console.log(pokemon);
+    (async function () {
+      for (let i = 0; i < 4; i++) {
+        do {
+          index = Math.floor(Math.random() * allPokemonNames.length);
+        } while (chosenPokemon.some((p) => p.name === allPokemonNames[index]));
+        let imageUrl = await getImage(allPokemonNames[index]);
+        let onePokemon = {
+          name: allPokemonNames[index],
+          imageUrl: imageUrl,
+        };
+        chosenPokemon.push(onePokemon);
+      }
+      console.log(chosenPokemon);
+      setPokemon(chosenPokemon);
+    })();
   }, []);
+
   return (
     <>
-      <Card />
-      {pokemon.map((p) => (
-        <p key={p.name}>{p.name}</p>
-      ))}
+      {pokemon.map((p) => {
+        return (
+          <>
+            <Card key={p.name} pokemon={p} />
+          </>
+        );
+      })}
     </>
   );
 }
