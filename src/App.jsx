@@ -4,6 +4,7 @@ import { Card } from "./components/Card.jsx";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
 
   async function getImage(name) {
     const url = "https://pokeapi.co/api/v2/pokemon/" + name;
@@ -86,12 +87,14 @@ function App() {
 
   function loseGame() {
     alert("you lose");
+    setGameOver(true);
     // remove click handler
     // win or lose
   }
 
   function winGame() {
     alert("you win");
+    setGameOver(true);
   }
 
   function checkWin(array) {
@@ -115,7 +118,11 @@ function App() {
       {pokemon.map((p) => {
         return (
           <>
-            <Card key={p.name} pokemon={p} onClick={handleClick} />
+            <Card
+              key={p.name}
+              pokemon={p}
+              onClick={!gameOver ? handleClick : null}
+            />
           </>
         );
       })}

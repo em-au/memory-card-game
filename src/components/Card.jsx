@@ -7,7 +7,7 @@ function Card({ pokemon, onClick }) {
       <img
         src={pokemon.imageUrl}
         alt={pokemon.name}
-        onClick={() => onClick(pokemon.name)}
+        onClick={() => (onClick ? onClick(pokemon.name) : null)}
       />
     </>
   );
