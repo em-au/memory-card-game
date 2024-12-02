@@ -1,52 +1,50 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { Card } from "../components/Card.jsx";
+import { Card } from "./components/Card.jsx";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
-  const allPokemonNames = [
-    "eevee",
-    "bellibolt",
-    "miltank",
-    "torkoal",
-    "pachirisu",
-    "snom",
-    "litten",
-    "squirtle",
-    "rhydon",
-    "altaria",
-    "camerupt",
-    "azumarill",
-    "espurr",
-    "togepi",
-    "slowpoke",
-    "magcargo",
-    "ditto",
-    "mew",
-    "gardevoir",
-    "snorlax",
-    "pikachu",
-    "arcanine",
-    "wobbuffet",
-    "blissey",
-    "lickitung",
-    "charmander",
-    "bulbasaur",
-    "turtwig",
-    "cyndaquil",
-    "psyduck",
-  ];
 
   async function getImage(name) {
-    //const pokemon = "eevee";
     const url = "https://pokeapi.co/api/v2/pokemon/" + name;
     const response = await fetch(url, { mode: "cors" });
     const data = await response.json();
-    //setImageUrl(data.sprites.other["official-artwork"]["front_default"]);
     return data.sprites.other["official-artwork"]["front_default"];
   }
 
   useEffect(() => {
+    const allPokemonNames = [
+      "eevee",
+      "bellibolt",
+      "miltank",
+      "torkoal",
+      "pachirisu",
+      "snom",
+      "litten",
+      "squirtle",
+      "rhydon",
+      "altaria",
+      "camerupt",
+      "azumarill",
+      "espurr",
+      "togepi",
+      "slowpoke",
+      "magcargo",
+      "ditto",
+      "mew",
+      "gardevoir",
+      "snorlax",
+      "pikachu",
+      "arcanine",
+      "wobbuffet",
+      "blissey",
+      "lickitung",
+      "charmander",
+      "bulbasaur",
+      "turtwig",
+      "cyndaquil",
+      "psyduck",
+    ];
     let chosenPokemon = [];
     let index;
     (async function () {
@@ -58,6 +56,7 @@ function App() {
         let onePokemon = {
           name: allPokemonNames[index],
           imageUrl: imageUrl,
+          wasClicked: false,
         };
         chosenPokemon.push(onePokemon);
       }
@@ -66,12 +65,30 @@ function App() {
     })();
   }, []);
 
+  function handleClick(pokemonName) {
+    alert(pokemonName);
+    for (let i = 0; i < pokemon.length; i++) {
+      if (pokemon[i].name === pokemonName) {
+        if (!pokemon[i].wasClicked) {
+          const pCopy = { ...pokemon[i], wasClicked: true };
+          const pokemonCopy = pokemon.with(i, pCopy);
+          setPokemon(pokemonCopy);
+        } else endGame();
+      }
+    }
+  }
+
+  function endGame() {
+    alert("game over");
+    // remove click handler
+  }
+
   return (
     <>
       {pokemon.map((p) => {
         return (
           <>
-            <Card key={p.name} pokemon={p} />
+            <Card key={p.name} pokemon={p} onClick={handleClick} />
           </>
         );
       })}
