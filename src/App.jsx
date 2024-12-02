@@ -71,17 +71,34 @@ function App() {
         if (!pokemon[i].wasClicked) {
           const pCopy = { ...pokemon[i], wasClicked: true };
           let pokemonCopy = pokemon.with(i, pCopy);
-          shuffle(pokemonCopy);
-          setPokemon(pokemonCopy);
-        } else endGame();
+          if (!checkWin(pokemonCopy)) {
+            shuffle(pokemonCopy);
+            setPokemon(pokemonCopy);
+          } else {
+            winGame();
+          }
+        } else {
+          loseGame();
+        }
       }
     }
   }
 
-  function endGame() {
-    alert("game over");
+  function loseGame() {
+    alert("you lose");
     // remove click handler
     // win or lose
+  }
+
+  function winGame() {
+    alert("you win");
+  }
+
+  function checkWin(array) {
+    for (let p of array) {
+      if (!p.wasClicked) return false;
+    }
+    return true;
   }
 
   function shuffle(array) {
