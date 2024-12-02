@@ -1,3 +1,9 @@
+@font-face {
+  font-family: Pixelify;
+  src: url("../assets/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf")
+    format("truetype");
+}
+
 html,
 body,
 #app,
@@ -6,8 +12,9 @@ body,
 }
 
 body {
-  background-image: url("../assets/background/66px_5zu1_230310.jpg"); /* FreePik */
+  background-image: url("../assets/background/background.jpg"); /* FreePik */
   background-size: contain;
+  font-family: Pixelify;
 }
 
 #root {
@@ -35,9 +42,10 @@ h1 {
 }
 
 .card {
-  border: 3px solid rgb(255, 156, 25);
+  border: 3px solid rgb(250, 167, 0);
+  background-color: rgb(242, 201, 135);
   border-radius: 10px;
-  padding: 0.5rem;
+  padding: 0.2rem;
 }
 
 img {

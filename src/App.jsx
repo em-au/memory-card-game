@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import "./styles/style.css";
 import { Card } from "./components/Card.jsx";
 
+//TODO: implement current and best score
+
 function App() {
   const [pokemon, setPokemon] = useState([]);
   const [gameOver, setGameOver] = useState(false);
@@ -114,7 +116,7 @@ function App() {
 
   return (
     <>
-      <h1>Memory Card</h1>
+      <h1>MEMORY CARD</h1>
       <div className="grid">
         {pokemon.map((p) => {
           return (
