@@ -1,0 +1,47 @@
+html,
+body,
+#app,
+#app > div {
+  height: 100%;
+}
+
+body {
+  background-image: url("../assets/background/66px_5zu1_230310.jpg"); /* FreePik */
+  background-size: contain;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+
+h1 {
+  height: 10vh;
+  font-size: 2rem;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.grid {
+  display: grid;
+  max-height: 80vh;
+  border: 1px solid red;
+  grid-template-columns: repeat(4, minmax(0, 15vh));
+  grid-template-rows: repeat(4, minmax(0, 15vh));
+  gap: 1rem;
+}
+
+.card {
+  border: 3px solid rgb(255, 156, 25);
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+//import "./App.css";
+import "./styles/style.css";
 import { Card } from "./components/Card.jsx";
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
     let chosenPokemon = [];
     let index;
     (async function () {
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 16; i++) {
         do {
           index = Math.floor(Math.random() * allPokemonNames.length);
         } while (chosenPokemon.some((p) => p.name === allPokemonNames[index]));
@@ -88,8 +89,6 @@ function App() {
   function loseGame() {
     alert("you lose");
     setGameOver(true);
-    // remove click handler
-    // win or lose
   }
 
   function winGame() {
@@ -115,17 +114,16 @@ function App() {
 
   return (
     <>
-      {pokemon.map((p) => {
-        return (
-          <>
-            <Card
-              key={p.name}
-              pokemon={p}
-              onClick={!gameOver ? handleClick : null}
-            />
-          </>
-        );
-      })}
+      <h1>Memory Card</h1>
+      <div className="grid">
+        {pokemon.map((p) => {
+          return (
+            <div className="card" key={p.name}>
+              <Card pokemon={p} onClick={!gameOver ? handleClick : null} />
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }
