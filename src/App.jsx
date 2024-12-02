@@ -66,12 +66,12 @@ function App() {
   }, []);
 
   function handleClick(pokemonName) {
-    alert(pokemonName);
     for (let i = 0; i < pokemon.length; i++) {
       if (pokemon[i].name === pokemonName) {
         if (!pokemon[i].wasClicked) {
           const pCopy = { ...pokemon[i], wasClicked: true };
-          const pokemonCopy = pokemon.with(i, pCopy);
+          let pokemonCopy = pokemon.with(i, pCopy);
+          shuffle(pokemonCopy);
           setPokemon(pokemonCopy);
         } else endGame();
       }
@@ -81,6 +81,16 @@ function App() {
   function endGame() {
     alert("game over");
     // remove click handler
+    // win or lose
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
   }
 
   return (
