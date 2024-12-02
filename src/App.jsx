@@ -7,6 +7,8 @@ import { Card } from "./components/Card.jsx";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
+  const [bestScore, setBestScore] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
   async function getImage(name) {
@@ -78,6 +80,7 @@ function App() {
           if (!checkWin(pokemonCopy)) {
             shuffle(pokemonCopy);
             setPokemon(pokemonCopy);
+            setCurrentScore(currentScore + 1);
           } else {
             winGame();
           }
@@ -90,11 +93,19 @@ function App() {
 
   function loseGame() {
     alert("you lose");
-    setGameOver(true);
+    endGame();
   }
 
   function winGame() {
     alert("you win");
+    endGame();
+  }
+
+  function endGame() {
+    if (currentScore > bestScore) {
+      setBestScore(currentScore);
+    }
+    setCurrentScore(0);
     setGameOver(true);
   }
 
@@ -116,7 +127,13 @@ function App() {
 
   return (
     <>
-      <h1>MEMORY CARD</h1>
+      <div className="header">
+        <h1>MEMORY CARD</h1>
+        <div className="scores">
+          <p>Best Score: {bestScore}</p>
+          <p>Current Score: {currentScore}</p>
+        </div>
+      </div>
       <div className="grid">
         {pokemon.map((p) => {
           return (

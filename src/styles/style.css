@@ -14,6 +14,7 @@ body,
 body {
   background-image: url("../assets/background/background.jpg"); /* FreePik */
   background-size: contain;
+  /* TODO: fit background image repeating when reducing width of window */
   font-family: Pixelify;
 }
 
@@ -25,11 +26,24 @@ body {
   min-height: 100%;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 1rem;
+}
+
 h1 {
-  height: 10vh;
   font-size: 2rem;
   margin: 0;
-  margin-top: 1rem;
+  line-height: 1rem;
+  color: rgb(52, 102, 175);
+}
+
+.scores > * {
+  margin: 0;
+  text-align: right;
+  font-size: 1.2rem;
 }
 
 .grid {
@@ -42,8 +56,8 @@ h1 {
 }
 
 .card {
-  border: 3px solid rgb(250, 167, 0);
-  background-color: rgb(242, 201, 135);
+  border: 3px solid rgb(255, 203, 5);
+  background-color: rgba(247, 201, 128, 0.388);
   border-radius: 10px;
   padding: 0.2rem;
 }
