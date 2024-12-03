@@ -98,16 +98,15 @@ function App() {
 
   function handlePlayAgain() {
     setGameOver(false);
+    setWin(false);
     setPlays(plays + 1);
   }
 
   function loseGame() {
-    alert("you lose");
     endGame();
   }
 
   function winGame() {
-    alert("you win");
     setWin(true);
     endGame();
   }
@@ -158,12 +157,14 @@ function App() {
       {gameOver ? (
         win ? (
           <Message
+            outcome="win"
             header="You win!"
             text="You clicked on all the cards"
             onClick={handlePlayAgain}
           />
         ) : (
           <Message
+            outcome="lose"
             header="Game over!"
             text="You clicked on the same card twice"
             onClick={handlePlayAgain}

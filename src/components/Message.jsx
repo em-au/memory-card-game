@@ -1,8 +1,8 @@
 export { Message };
 
-function Message({ header, text, onClick }) {
+function Message({ outcome, header, text, onClick }) {
   return (
-    <div className="message">
+    <div className={`message ${outcome}`}>
       <h1>{header}</h1>
       <p>{text}</p>
       <button type="button" onClick={onClick}>

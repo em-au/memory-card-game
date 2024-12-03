@@ -67,3 +67,32 @@ img {
   max-height: 100%;
   object-fit: contain;
 }
+
+.message {
+  position: absolute;
+  z-index: 1;
+  top: 25%;
+  background-color: white;
+  box-shadow: -10px 0 0 0 gray, 10px 0 0 0 gray, 0 -10px 0 0 gray,
+    0 10px 0 0 gray;
+  text-align: center;
+  padding: 2rem;
+}
+
+.message.lose h1 {
+  color: rgb(221, 0, 0);
+}
+
+.message.win h1 {
+  color: rgb(0, 133, 42);
+}
+
+button {
+  background-color: rgb(217, 217, 217);
+  box-shadow: 3px 3px 1px rgb(177, 177, 177);
+}
+
+button:hover {
+  box-shadow: none;
+  transform: translateX(3px) translateY(3px);
+}
