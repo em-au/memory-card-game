@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import "./styles/style.css";
 import { Card } from "./components/Card.jsx";
 import { Message } from "./components/Message.jsx";
+import { Instruction } from "./components/Instruction.jsx";
 
 function App() {
+  const [showInstruction, setShowInstruction] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const [bestScore, setBestScore] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
@@ -71,6 +73,10 @@ function App() {
     })();
   }, [plays]);
 
+  function closeInstruction() {
+    setShowInstruction(false);
+  }
+
   function handleClick(pokemonName) {
     for (let i = 0; i < pokemon.length; i++) {
       if (pokemon[i].name === pokemonName) {
@@ -131,6 +137,12 @@ function App() {
     <>
       <div className="header">
         <h1>MEMORY CARD</h1>
+        <button type="button" onClick={() => setShowInstruction(true)}>
+          <i
+            className="fa-regular fa-circle-question fa-xl"
+            alt="instructions"
+          ></i>
+        </button>
         <div className="scores">
           <p>Best Score: {bestScore}</p>
           <p>Current Score: {currentScore}</p>
@@ -163,6 +175,8 @@ function App() {
           />
         )
       ) : null}
+
+      {showInstruction && <Instruction onClick={closeInstruction} />}
     </>
   );
 }

@@ -12,9 +12,10 @@ body,
 }
 
 body {
-  background-image: url("../assets/background/background.jpg"); /* FreePik */
-  background-size: contain;
-  /* TODO: fit background image repeating when reducing width of window */
+  background-image: url("../assets/background/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
   font-family: Pixelify;
 }
 
@@ -29,8 +30,8 @@ body {
 .header {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin: 1rem;
+  margin: 1rem 0;
+  width: calc(4 * 15vh + 3 * 1rem);
 }
 
 h1 {
@@ -38,6 +39,10 @@ h1 {
   margin: 0;
   line-height: 1rem;
   color: rgb(52, 102, 175);
+}
+
+.scores {
+  margin-left: auto;
 }
 
 .scores > * {
@@ -49,7 +54,6 @@ h1 {
 .grid {
   display: grid;
   max-height: 80vh;
-  border: 1px solid red;
   grid-template-columns: repeat(4, minmax(0, 15vh));
   grid-template-rows: repeat(4, minmax(0, 15vh));
   gap: 1rem;
@@ -57,7 +61,7 @@ h1 {
 
 .card {
   border: 3px solid rgb(255, 203, 5);
-  background-color: rgba(247, 201, 128, 0.388);
+  background-color: rgba(247, 201, 128, 0.554);
   border-radius: 10px;
   padding: 0.2rem;
 }
@@ -68,7 +72,8 @@ img {
   object-fit: contain;
 }
 
-.message {
+.message,
+.instruction {
   position: absolute;
   z-index: 1;
   top: 25%;
@@ -77,6 +82,7 @@ img {
     0 10px 0 0 gray;
   text-align: center;
   padding: 2rem;
+  max-width: 50%;
 }
 
 .message.lose h1 {
@@ -87,12 +93,16 @@ img {
   color: rgb(0, 133, 42);
 }
 
-button {
+button:not(.header button) {
   background-color: rgb(217, 217, 217);
   box-shadow: 3px 3px 1px rgb(177, 177, 177);
 }
 
-button:hover {
+button:hover:not(.header button) {
   box-shadow: none;
   transform: translateX(3px) translateY(3px);
+}
+
+.header button {
+  background: none;
 }
