@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 //import "./App.css";
 import "./styles/style.css";
 import { Card } from "./components/Card.jsx";
+import { Message } from "./components/Message.jsx";
 
-//TODO: implement current and best score
+// TODO: implement losing message
+// TODO: implement winning message (achieved highest possible score)
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
   const [bestScore, setBestScore] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [win, setWin] = useState(false);
+  const [plays, setPlays] = useState(0);
 
   async function getImage(name) {
     const url = "https://pokeapi.co/api/v2/pokemon/" + name;
@@ -51,10 +55,11 @@ function App() {
       "cyndaquil",
       "psyduck",
     ];
+    const SIZE = 4;
     let chosenPokemon = [];
     let index;
     (async function () {
-      for (let i = 0; i < 16; i++) {
+      for (let i = 0; i < SIZE; i++) {
         do {
           index = Math.floor(Math.random() * allPokemonNames.length);
         } while (chosenPokemon.some((p) => p.name === allPokemonNames[index]));
@@ -69,7 +74,7 @@ function App() {
       console.log(chosenPokemon);
       setPokemon(chosenPokemon);
     })();
-  }, []);
+  }, [plays]);
 
   function handleClick(pokemonName) {
     for (let i = 0; i < pokemon.length; i++) {
@@ -91,6 +96,11 @@ function App() {
     }
   }
 
+  function handlePlayAgain() {
+    setGameOver(false);
+    setPlays(plays + 1);
+  }
+
   function loseGame() {
     alert("you lose");
     endGame();
@@ -98,6 +108,7 @@ function App() {
 
   function winGame() {
     alert("you win");
+    setWin(true);
     endGame();
   }
 
@@ -143,6 +154,22 @@ function App() {
           );
         })}
       </div>
+
+      {gameOver ? (
+        win ? (
+          <Message
+            header="You win!"
+            text="You clicked on all the cards"
+            onClick={handlePlayAgain}
+          />
+        ) : (
+          <Message
+            header="Game over!"
+            text="You clicked on the same card twice"
+            onClick={handlePlayAgain}
+          />
+        )
+      ) : null}
     </>
   );
 }
