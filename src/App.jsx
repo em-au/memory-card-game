@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-//import "./App.css";
 import "./styles/style.css";
 import { Card } from "./components/Card.jsx";
 import { Message } from "./components/Message.jsx";
-
-// TODO: implement losing message
-// TODO: implement winning message (achieved highest possible score)
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -55,7 +51,7 @@ function App() {
       "cyndaquil",
       "psyduck",
     ];
-    const SIZE = 4;
+    const SIZE = 16;
     let chosenPokemon = [];
     let index;
     (async function () {
@@ -71,7 +67,6 @@ function App() {
         };
         chosenPokemon.push(onePokemon);
       }
-      console.log(chosenPokemon);
       setPokemon(chosenPokemon);
     })();
   }, [plays]);
@@ -89,6 +84,10 @@ function App() {
           } else {
             winGame();
           }
+          setCurrentScore(currentScore + 1);
+          if (currentScore >= bestScore) {
+            setBestScore(currentScore + 1);
+          }
         } else {
           loseGame();
         }
@@ -99,23 +98,16 @@ function App() {
   function handlePlayAgain() {
     setGameOver(false);
     setWin(false);
+    setCurrentScore(0);
     setPlays(plays + 1);
   }
 
   function loseGame() {
-    endGame();
+    setGameOver(true);
   }
 
   function winGame() {
     setWin(true);
-    endGame();
-  }
-
-  function endGame() {
-    if (currentScore > bestScore) {
-      setBestScore(currentScore);
-    }
-    setCurrentScore(0);
     setGameOver(true);
   }
 
