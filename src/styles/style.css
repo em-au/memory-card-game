@@ -17,6 +17,7 @@ body {
   background-repeat: no-repeat;
   background-position: bottom;
   font-family: Pixelify;
+  color: black;
 }
 
 #root {
@@ -64,6 +65,8 @@ h1 {
   background-color: rgba(247, 201, 128, 0.554);
   border-radius: 10px;
   padding: 0.2rem;
+  display: flex;
+  align-items: center;
 }
 
 img {
@@ -93,6 +96,10 @@ img {
   color: rgb(0, 133, 42);
 }
 
+button {
+  color: black;
+}
+
 button:not(.header button) {
   background-color: rgb(217, 217, 217);
   box-shadow: 3px 3px 1px rgb(177, 177, 177);
@@ -105,4 +112,15 @@ button:hover:not(.header button) {
 
 .header button {
   background: none;
+}
+
+@media (max-width: 800px) {
+  .header {
+    width: 100vw;
+    flex-direction: column;
+  }
+
+  .scores {
+    margin-left: 0;
+  }
 }
